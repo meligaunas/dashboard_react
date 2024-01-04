@@ -1,18 +1,18 @@
 import './App.css'
 import { ContentWrapper } from './components/ContentWrapper'
-import { SideBar } from './components/SideBar'
+import { SideBar } from './components/SideBar';
 
 function App() {
    return (
     <div id="wrapper">
   
-    <SideBar/>
+     <SideBar/>
 		
-	<ContentWrapper/>
+     <ContentWrapper/>
 
-	</div>
+    </div>
   
-  )
+  );
 }
 
-export default App
+export default App;

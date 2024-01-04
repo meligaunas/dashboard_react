@@ -1,4 +1,4 @@
-import { ContentRowItem } from "./ContentRowItem"
+import { ContentRowItem } from "./ContentRowItem";
 
 export const ContentRowMovies = () => {
     const items = [
@@ -7,14 +7,14 @@ export const ContentRowMovies = () => {
             color : "primary",
             title : "Movies in Data Base",
             value : 21,
-            icon : "fa-film"
+            icon : "fa-film",
         },
         {
             id : crypto.randomUUID(),
             color : "success",
             title : "Total awards",
             value : 79,
-            icon : "fa-award"
+            icon : "fa-award",
         },
         {
             id : crypto.randomUUID(),
@@ -23,11 +23,12 @@ export const ContentRowMovies = () => {
             value : 49,
             icon : "fa-user"
         },
-    ]
+    ];
+    
   return (
     <div className="row">
         {items.map(({id, title, value, color, icon}) => (
-        <ContentRowItem key={id} title={title} value={value} color={color} icon={icon} />
+            <ContentRowItem key={id} title={title} value={value} color={color} icon={icon} />
         ))}
     </div>
   );

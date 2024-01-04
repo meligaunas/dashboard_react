@@ -13,13 +13,12 @@ export const GenresInDb = () => {
                 {
                     genres.map((genre,index) => ( 
                     <div key={index} className="col-lg-6 mb-4">
-                    <div className="card bg-dark text-white shadow">
-                        <div className="card-body">{genre}</div>
+                        <div className="card bg-dark text-white shadow">
+                          <div className="card-body">{genre}</div>
+                        </div>
                     </div>
-                </div>
                 ))}
-               
-                
+                          
 
             </div>
         </div>

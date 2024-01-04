@@ -12,15 +12,15 @@ export const ContentRowTop = () => {
             </div>
                     
            <ContentRowMovies/>
-        
-                        
+                                
             <div className="row">
                 <LastMovieInDb/>
+        
                 <GenresInDb/>
-                
             </div>
             <TableMovies/>
+
      </div>
-  )
-}
+  );
+};
 
