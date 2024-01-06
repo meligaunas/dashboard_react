@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-export const TableItem = ({ movie: {id, length, title, awards, rating, genre}, handleEditMovie }) => {
+export const TableItem = ({ movie: {id, length, title, awards, rating, genre}, handleEditMovie, handleDeleteMovie }) => {
   return (
     <tr>
         <td>{title}</td>
@@ -12,7 +12,7 @@ export const TableItem = ({ movie: {id, length, title, awards, rating, genre}, h
             <button className='btn btn-sm btn-outline-success mr-3' onClick={() => handleEditMovie(id) }>
              <i className="fas fa-pencil-alt"></i> 
             </button>
-            <button className='btn btn-sm btn-outline-danger'>
+            <button className='btn btn-sm btn-outline-danger'onClick={() => handleDeleteMovie(id) }>
              <i className="fas fa-trash-alt"></i> 
             </button>
             </div>
@@ -23,7 +23,8 @@ export const TableItem = ({ movie: {id, length, title, awards, rating, genre}, h
 
 TableItem.propTypes =  {
     movie : PropTypes.object,
-    handleEditMovie : PropTypes.func
+    handleEditMovie : PropTypes.func,
+    handleDeleteMovie : PropTypes.func
 };
 
 TableItem.defaultProps = {

@@ -6,6 +6,7 @@ import { Paginator } from "../components/Paginator";
 import { FormSearch } from "../components/FormSearch";
 import { FormMovie } from "../components/FormMovie";
 import { showMessageSucess } from "../components/Toast";
+import Swal from "sweetalert2";
 
 
 export const ListMovies = () => {
@@ -71,6 +72,57 @@ export const ListMovies = () => {
     
    }}
 
+   const handleUpdateMovie = async(id,data) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/movies/${id}`,{
+        method: 'PUT',
+        headers : {
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(data)
+      })
+    const result = await response.json();
+
+  setMovies(movies.map(movie => movie.id === result.data.id ? result.data : movie));
+  setMovie(null)
+  showMessageSucess(result.message)
+    } catch (error) {
+      console.log(error)
+    }
+   };
+
+   const handleDeleteMovie = async(id) => {
+    Swal.fire({
+      title: "¿Estás seguro de eliminar la película?",
+      showDenyButton: true,
+      confirmButtonText: "Si eliminala",
+      confirmButtonColor: 'red',
+      denyButtonText: `No`,
+      denyButtonColor: 'gray'
+    }).then(async(result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/movies/${id}`,
+           {
+            method:"DELETE",
+           }
+          );
+          const result = await response.json();
+          if(result.ok){
+           showMessageSucess(result.message);
+           setMovies(movies.filter(movie => movie.id !== id))
+          }
+      
+        } catch (error) {
+          console.log(error);
+          
+         }
+
+      } 
+    });
+  }
+
   return loading ? (
         <Loading/> 
     ) : (
@@ -81,7 +133,7 @@ export const ListMovies = () => {
             <Card.Title>{movie ? 'Editar' : 'Agregar'} Película</Card.Title>
           </Card.Header>
           <CardBody>
-          <FormMovie handleAddMovie={handleAddMovie} movie={movie} setMovie={setMovie}/>
+          <FormMovie handleAddMovie={handleAddMovie} movie={movie} handleUpdateMovie={handleUpdateMovie} setMovie={setMovie} />
           </CardBody>
         </Card>
       
@@ -107,12 +159,12 @@ export const ListMovies = () => {
             </tr>
         </thead>
         <tbody>
-             {
-                movies.map((movie) => (
+             {movies.map((movie) => (
                     <TableItem 
                      key={movie.id}
                      movie={movie}                    
                      handleEditMovie={handleEditMovie}
+                     handleDeleteMovie={handleDeleteMovie}
                     />
                   ))}
            
@@ -122,9 +174,7 @@ export const ListMovies = () => {
    </Card.Body>
    </Card>
       </Col>
-    </Row>
-    
- 
+    </Row>    
   );
 };
 
